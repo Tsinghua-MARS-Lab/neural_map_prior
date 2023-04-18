@@ -84,7 +84,8 @@
     <table border="0" align="center">
         <tr>
             <td align="center" style="padding: 0pt 0 15pt 0">
-                <a class="bar" href=""><b>CVPR 2023</b></a>
+                <a class="bar" href=""><b>CVPR 2023</b></a> |
+                <a class="bar" href="https://arxiv.org/pdf/2304.08481.pdf"><b>Arxiv</b></a>
             </td>
         </tr>
     </table>
@@ -183,7 +184,7 @@
 <div class="section">
     <div class="title" id="lang">Results</div>
     <div class="logo" style="" align="center">
-        <img style="max-width: 100%;" src="images/seg.png">
+        <img style="max-width: 70%;" src="images/seg.png">
     </div>
     <p>
         <b>Quantitative analysis of map segmentation.</b> The performance of online map segmentation methods and their NMP versions on the nuScenes validation set. By adding prior knowledge, NMP consistently improves these methods.
@@ -191,14 +192,16 @@
     <br>
     </br>
     <div class="logo" style="" align="center">
-        <img style="max-width: 100%;" src="images/det.png">
+        <img style="max-width: 70%;" src="images/det.png">
     </div>
     <p>
         <b>Quantitative analysis of map detection.</b> The performance of map detection method and its NMP version on the nuScenes validation set. Results show that by adding prior knowledge, the NMP enhances the quality of VectorMapNet.
     <br>
     </br>
+    <br>
+</br>
     <div class="logo" style="" align="center">
-        <img style="max-width: 100%;" src="images/range.png">
+        <img style="max-width: 70%;" src="images/range.png">
     </div>
     <p>
         <b>Comparison of model performance at different BEV ranges.</b> As the perception range increases, it is difficult for the online method to achieve good results; NMP significantly improves the results.
@@ -206,7 +209,7 @@
     <br>
     </br>
     <div class="logo" style="" align="center">
-        <img style="max-width: 100%;" src="images/weather.png">
+        <img style="max-width: 70%;" src="images/weather.png">
     </div>
     <p>
         <b>Performance in adverse weather conditions.</b> Neural map priors are particularly useful on rainy days and at night than in normal weather. 
@@ -214,7 +217,7 @@
     <br>
     </br>
     <div class="logo" style="" align="center">
-        <img style="max-width: 100%;" src="images/boston.png">
+        <img style="max-width: 70%;" src="images/boston.png">
     </div>
     <p>
         <b>Performance on Boston split.</b> The original split contains unbalanced historical trips for the training and validation sets; Boston split is more balanced.
@@ -239,8 +242,10 @@
  -->    
 
     <div class="logo" style="" align="center">
-        <img style="max-width: 100%;" src="images/nmp-figure-4.png">
+        <img style="max-width: 85%;" src="images/nmp-figure-4.png">
     </div>
+    <br>
+</br>
     <p>
         <b>Qualitative results.</b> From the first to the fifth row: Ground truth, HDMapNet, BEVFormer, BEVFormer with Neural Map Prior and GRU weights. We also visualize z<sub>t</sub>, the attention map of the last step of the GRU fusion process. The model learns to selectively combine current and prior map features: specifically, when the prediction quality of the current frame is good, the network tends to learn a larger z<sub>t</sub>, assigning more weight to the current feature; when the prediction quality of the current frame is poor, usually at intersections or locations farther away from the ego-vehicle, the network tends to learn a smaller z<sub>t</sub> for the prior feature.
     </p> 
