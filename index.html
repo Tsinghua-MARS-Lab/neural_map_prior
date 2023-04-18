@@ -42,8 +42,8 @@
     <!-- === Title Ends === -->
     <div class="author" style="margin-top: -35pt">
         <a href="">Xuan Xiong</a><sup>1</sup>,&nbsp;
-        <a href="https://scholar.google.com.hk/citations?hl=en&user=nUyTDosAAAAJ">Yicheng Liu</a><sup>1</sup>,&nbsp;
-        <a href="https://scholar.google.com.hk/citations?hl=en&user=nUyTDosAAAAJ">Tianyuan Yuan</a><sup>2</sup>,&nbsp;
+        <a href="https://scholar.google.com.hk/citations?hl=en&user=vRmsgQUAAAAJ">Yicheng Liu</a><sup>1</sup>,&nbsp;
+        <a href="">Tianyuan Yuan</a><sup>2</sup>,&nbsp;
         <a href="https://people.csail.mit.edu/yuewang/" target="_blank">Yue Wang</a><sup>3</sup>,&nbsp;
         <a href="https://scholar.google.com.hk/citations?hl=en&user=nUyTDosAAAAJ">Yilun Wang</a><sup>2</sup>,&nbsp;
         <a href="https://hangzhaomit.github.io/">Hang Zhao</a><sup>2,1</sup>&nbsp;
@@ -97,22 +97,6 @@
 
 
 <div class="section">
-    <div class="title" id="lang">Abstract</div>
-    <p>
-        High-definition (HD) semantic maps are crucial for autonomous vehicles navigating urban environments. 
-        Traditional offline HD maps, created through labor-intensive manual annotation processes, are both costly and incapable of accommodating timely updates.
-        Recently, researchers have proposed inferring local maps based on online sensor observations; however, this approach is constrained by the sensor perception range and is susceptible to occlusions. In this work, we propose Neural Map Prior (NMP), a neural representation of global maps that facilitates automatic global map updates and improves local map inference performance.
-        To incorporate the strong map prior into local map inference, we employ cross-attention that dynamically captures correlations between current features and prior features. For updating the global neural map prior, we use a learning-based fusion module to guide the network in fusing features from previous traversals. This design allows the network to capture a global neural map prior during sequential online map predictions.
-        Experimental results on the nuScenes dataset demonstrate that our framework is highly compatible with various map segmentation and detection architectures and considerably strengthens map prediction performance, even under adverse weather conditions and across longer horizons. To the best of our knowledge, this represents the first learning-based system for constructing a global map prior.
-    </p>
-
-</div>
-
-
-<!-- === Home Section Ends === -->
-
-
-<div class="section">
     <div class="title" id="lang">Demos</div>
     
     <div class="col">
@@ -136,6 +120,27 @@
 
 </div>
 
+
+<div class="section">
+    <div class="title" id="lang">Abstract</div>
+    <p>
+        High-definition (HD) semantic maps are crucial for autonomous vehicles navigating urban environments. 
+        Traditional offline HD maps, created through labor-intensive manual annotation processes, are both costly and incapable of accommodating timely updates.
+        Recently, researchers have proposed inferring local maps based on online sensor observations; however, this approach is constrained by the sensor perception range and is susceptible to occlusions. In this work, we propose Neural Map Prior (NMP), a neural representation of global maps that facilitates automatic global map updates and improves local map inference performance.
+        To incorporate the strong map prior into local map inference, we employ cross-attention that dynamically captures correlations between current features and prior features. For updating the global neural map prior, we use a learning-based fusion module to guide the network in fusing features from previous traversals. This design allows the network to capture a global neural map prior during sequential online map predictions.
+        Experimental results on the nuScenes dataset demonstrate that our framework is highly compatible with various map segmentation and detection architectures and considerably strengthens map prediction performance, even under adverse weather conditions and across longer horizons. To the best of our knowledge, this represents the first learning-based system for constructing a global map prior.
+    </p>
+
+</div>
+
+<div class="section">
+    <div class="title" id="lang">Main Idea</div>
+    <img src="images/nmp-figure-1.png" style="max-width: 100%;">
+    <p>
+        <b>Main idea</b>. Traditional offline semantic mapping pipelines (first row from left) involve a complex manual annotation pipeline and do not support timely map updates. Online HD semantic map learning methods (second row from left) rely entirely on onboard sensor observations and are susceptible to occlusions. We propose the Neural Map Prior (on the right), an innovative neural representation of global maps designed to aid onboard map prediction. NMP is incrementally updated as it continuously integrates new observations from a fleet of autonomous vehicles.
+    </p>
+</div>
+<!-- === Home Section Ends === -->
 
 <div class="section">
     <div class="title" id="lang">Architecture</div>
@@ -162,13 +167,7 @@
     </p>
 </div>
 
-<div class="section">
-    <div class="title" id="lang">Main Idea</div>
-    <img src="images/nmp-figure-1.png" style="max-width: 100%;">
-    <p>
-        <b>Main idea</b>. Traditional offline semantic mapping pipelines (first row from left) involve a complex manual annotation pipeline and do not support timely map updates. Online HD semantic map learning methods (second row from left) rely entirely on onboard sensor observations and are susceptible to occlusions. We propose the Neural Map Prior (on the right), an innovative neural representation of global maps designed to aid onboard map prediction. NMP is incrementally updated as it continuously integrates new observations from a fleet of autonomous vehicles.
-    </p>
-</div>
+
 
 <!-- <div class="section">
     <div class="title" id="lang">Method</div>
