@@ -4,17 +4,12 @@
 <!-- === Header Starts === -->
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
     <title>NeuralMapPrior</title>
-
     <link href="./assets/bootstrap.min.css" rel="stylesheet">
     <link href="./css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <!-- <link href="./assets/font.css" rel="stylesheet" type="text/css"> -->
     <link href="./assets/style.css" rel="stylesheet" type="text/css">
-
     <script src="./assets/jquery.min.js"></script>
     <script type="text/javascript" src="assets/corpus.js"></script>
-
 </head>
 <!-- === Header Ends === -->
 
@@ -23,14 +18,13 @@
 </script>
 
 <body>
-
 <!-- === Home Section Starts === -->
 <div class="section">
     <!-- === Title Starts === -->
 
     <div class="logo" align="center">
         <!-- <a href="" target="_blank"> -->
-            <!-- <img style=" width: 400pt;" src="images/hdmapnet_logo.png"> -->
+        <!-- <img style=" width: 400pt;" src="images/hdmapnet_logo.png"> -->
         <!-- </a> -->
     </div>
 
@@ -39,6 +33,7 @@
             <b></b>Neural Map Prior for Autonomous Driving
         </div>
     </div>
+
     <!-- === Title Ends === -->
     <div class="author" style="margin-top: -35pt">
         <a href="">Xuan Xiong</a><sup>1</sup>,&nbsp;
@@ -54,33 +49,8 @@
             <sup>2</sup>IIIS,Tsinghua University,
             <sup>3</sup>MIT
         </div>
-
-        <!-- <div class="social-icons">
-            <a href="https://arxiv.org/abs/2107.06307/">
-                <i class="fas fab fa-sticky-note"></i>ICRA 2022 (long version)
-            </a>
-            &nbsp;&nbsp;&nbsp;
-            <a href="https://drive.google.com/file/d/1CEX232SJIUDTPPIviSM_K47QkhV9_5ua/view">
-                <i class="fas fab fa-sticky-note"></i>CVPR 2021 Workshop (best paper nominee)
-            </a>
-            &nbsp;&nbsp;&nbsp;
-            <a href="https://github.com/Tsinghua-MARS-Lab/HDMapNet">
-                <i class="fab fab fa-github"></i>Code
-            </a>
-        </div> -->
-
     </div>
 
-
-    <!-- <table border="0" align="center">
-        <tr>
-            <td align="center" style="padding: 0pt 0 15pt 0">
-                <a class="bar" href="https://arxiv.org/abs/2107.06307/"><b>ICRA 2022 (long version)</b></a> |
-                <a class="bar" href="https://drive.google.com/file/d/1CEX232SJIUDTPPIviSM_K47QkhV9_5ua/view"><b>CVPR 2021 Workshop (best paper nominee)</b></a> |
-                <a class="bar" href="https://github.com/Tsinghua-MARS-Lab/HDMapNet"><b>Code</b></a>
-            </td>
-        </tr>
-    </table> -->
     <table border="0" align="center">
         <tr>
             <td align="center" style="padding: 0pt 0 15pt 0">
@@ -90,33 +60,30 @@
         </tr>
     </table>
     <p>
-        The Neural Map Prior (NMP) is a novel learning-based system that employs a neural representation of global maps to automatically update global maps and improve local map inference performance for autonomous vehicles through cross-attention and learning-based fusion, resulting in stronger performance in adverse weather conditions and longer horizons.
+        The Neural Map Prior (NMP) is a novel learning-based system that employs a neural representation of global maps
+        to automatically update global maps and improve local map inference performance for autonomous vehicles through
+        cross-attention and learning-based fusion, resulting in stronger performance in adverse weather conditions and
+        longer horizons.
     </p>
-    
-     
+
+
 </div>
 
 
 <div class="section">
     <div class="title" id="lang">Demos</div>
-    
     <div class="col">
         <table width="100%" style="margin: 0pt 0pt; text-align: left;">
-        <tr>
-            <td><img src="images/nmp-figure-2.png" style="max-width: 100%;"></td>
-            <!-- <td><img src="images/scene2_car_small.gif" style="max-width: 90%;"></td> -->
-            <!-- <td><img src="images/scene3_car_small.gif" style="max-width: 90%;"></td> -->
-        </tr>
-        <!-- <tr  height="10"></tr>
-        <tr>
-            <td><img src="images/scene5_car_small.gif" style="max-width: 90%;"></td>
-            <td><img src="images/scene13_car_small.gif" style="max-width: 90%;"></td>
-            <td><img src="images/scene14_car_small.gif" style="max-width: 90%;"></td>
-        </tr> -->
+            <tr>
+                <td><img src="images/nmp-figure-2.png" style="max-width: 100%;"></td>
+            </tr>
         </table>
     </div>
     <p>
-        <b>Demonstration of NMP for autonomous driving in adverse weather conditions.</b> Ground reflections during rainy days make online HD map predictions harder, posing safety issues for an autonomous driving system. NMP helps to make better predictions, as it incorporates prior information from other vehicles that have passed through the same area on sunny days.
+        <b>Demonstration of NMP for autonomous driving in adverse weather conditions.</b> Ground reflections during
+        rainy days make online HD map predictions harder, posing safety issues for an autonomous driving system. NMP
+        helps to make better predictions, as it incorporates prior information from other vehicles that have passed
+        through the same area on sunny days.
     </p>
 
 </div>
@@ -125,11 +92,21 @@
 <div class="section">
     <div class="title" id="lang">Abstract</div>
     <p>
-        High-definition (HD) semantic maps are crucial for autonomous vehicles navigating urban environments. 
-        Traditional offline HD maps, created through labor-intensive manual annotation processes, are both costly and incapable of accommodating timely updates.
-        Recently, researchers have proposed inferring local maps based on online sensor observations; however, this approach is constrained by the sensor perception range and is susceptible to occlusions. In this work, we propose Neural Map Prior (NMP), a neural representation of global maps that facilitates automatic global map updates and improves local map inference performance.
-        To incorporate the strong map prior into local map inference, we employ cross-attention that dynamically captures correlations between current features and prior features. For updating the global neural map prior, we use a learning-based fusion module to guide the network in fusing features from previous traversals. This design allows the network to capture a global neural map prior during sequential online map predictions.
-        Experimental results on the nuScenes dataset demonstrate that our framework is highly compatible with various map segmentation and detection architectures and considerably strengthens map prediction performance, even under adverse weather conditions and across longer horizons. To the best of our knowledge, this represents the first learning-based system for constructing a global map prior.
+        High-definition (HD) semantic maps are crucial for autonomous vehicles navigating urban environments.
+        Traditional offline HD maps, created through labor-intensive manual annotation processes, are both costly and
+        incapable of accommodating timely updates.
+        Recently, researchers have proposed inferring local maps based on online sensor observations; however, this
+        approach is constrained by the sensor perception range and is susceptible to occlusions. In this work, we
+        propose Neural Map Prior (NMP), a neural representation of global maps that facilitates automatic global map
+        updates and improves local map inference performance.
+        To incorporate the strong map prior into local map inference, we employ cross-attention that dynamically
+        captures correlations between current features and prior features. For updating the global neural map prior, we
+        use a learning-based fusion module to guide the network in fusing features from previous traversals. This design
+        allows the network to capture a global neural map prior during sequential online map predictions.
+        Experimental results on the nuScenes dataset demonstrate that our framework is highly compatible with various
+        map segmentation and detection architectures and considerably strengthens map prediction performance, even under
+        adverse weather conditions and across longer horizons. To the best of our knowledge, this represents the first
+        learning-based system for constructing a global map prior.
     </p>
 
 </div>
@@ -138,47 +115,34 @@
     <div class="title" id="lang">Main Idea</div>
     <img src="images/nmp-figure-1.png" style="max-width: 100%;">
     <p>
-        <b>Main idea</b>. Traditional offline semantic mapping pipelines (first row from left) involve a complex manual annotation pipeline and do not support timely map updates. Online HD semantic map learning methods (second row from left) rely entirely on onboard sensor observations and are susceptible to occlusions. We propose the Neural Map Prior (on the right), an innovative neural representation of global maps designed to aid onboard map prediction. NMP is incrementally updated as it continuously integrates new observations from a fleet of autonomous vehicles.
+        <b>Main idea</b>. Traditional offline semantic mapping pipelines (first row from left) involve a complex manual
+        annotation pipeline and do not support timely map updates. Online HD semantic map learning methods (second row
+        from left) rely entirely on onboard sensor observations and are susceptible to occlusions. We propose the Neural
+        Map Prior (on the right), an innovative neural representation of global maps designed to aid onboard map
+        prediction. NMP is incrementally updated as it continuously integrates new observations from a fleet of
+        autonomous vehicles.
     </p>
 </div>
 <!-- === Home Section Ends === -->
 
 <div class="section">
     <div class="title" id="lang">Architecture</div>
-        <div class="col">
+    <div class="col">
         <table width="100%" style="margin: 0pt 0pt; text-align: left;">
-        <tr>
-            <td><img src="images/nmp-figure-3.png" style="max-width: 100%;"></td>
-            <!-- <td><img src="images/temporal_14_small.gif" style="max-width: 95%;"></td> -->
-        </tr>
-        <!-- <tr  height="10"></tr>
-        <tr>
-            <td><img src="images/temporal_89_small.gif" style="max-width: 95%;"></td>
-            <td><img src="images/temporal_118_small.gif" style="max-width: 95%;"></td>
-        </tr>
-        <tr  height="10"></tr>
-        <tr>
-            <td><img src="images/temporal_148_small.gif" style="max-width: 95%;"></td>
-            <td><img src="images/temporal_43_small.gif" style="max-width: 95%;"></td>
-        </tr> -->
+            <tr>
+                <td><img src="images/nmp-figure-3.png" style="max-width: 100%;"></td>
+            </tr>
         </table>
     </div>
     <p>
-        <b>The model architecture of NMP.</b> The top yellow box illustrates the online HD map learning process, which takes images as input and processes them through a BEV encoder and decoder to generate map segmentation results. Within the green box, customized fusion modules—comprising C2P attention and GRU—are designed to effectively integrate prior map features between the encoder and decoder, subsequently decoded to produce the final map predictions. In the bottom blue box, the model queries map tiles that overlap with the current BEV feature from storage. After the update, the neural map is returned to the previously extracted map tiles.
+        <b>The model architecture of NMP.</b> The top yellow box illustrates the online HD map learning process, which
+        takes images as input and processes them through a BEV encoder and decoder to generate map segmentation results.
+        Within the green box, customized fusion modules—comprising C2P attention and GRU—are designed to effectively
+        integrate prior map features between the encoder and decoder, subsequently decoded to produce the final map
+        predictions. In the bottom blue box, the model queries map tiles that overlap with the current BEV feature from
+        storage. After the update, the neural map is returned to the previously extracted map tiles.
     </p>
 </div>
-
-
-
-<!-- <div class="section">
-    <div class="title" id="lang">Method</div>
-    <div class="logo" style="" align="center">
-        <img style="max-width: 100%;" src="images/overview_v3.png">
-    </div>
-    <p>
-        <b>The overview of HDMapNet</b>. Four modules parameterize HDMapNet: a perspective view image encoder, a neural view transformer in image branch, a pillar-based point cloud encoder, and a map element decoder. The output of the map decoder has 3 branches: semantic segmentation, instance detection and direction classification, which are processed into vectorized HD map. 
-    </p>    
-</div> -->
 
 
 <div class="section">
@@ -187,68 +151,68 @@
         <img style="max-width: 61.8%;" src="images/seg.png">
     </div>
     <p>
-        <b>Quantitative analysis of map segmentation.</b> The performance of online map segmentation methods and their NMP versions on the nuScenes validation set. By adding prior knowledge, NMP consistently improves these methods.
-    </p>    
+        <b>Quantitative analysis of map segmentation.</b> The performance of online map segmentation methods and their
+        NMP versions on the nuScenes validation set. By adding prior knowledge, NMP consistently improves these methods.
+    </p>
     <br>
     </br>
     <div class="logo" style="" align="center">
         <img style="max-width: 61.8%;" src="images/det.png">
     </div>
     <p>
-        <b>Quantitative analysis of map detection.</b> The performance of map detection method and its NMP version on the nuScenes validation set. Results show that by adding prior knowledge, the NMP enhances the quality of VectorMapNet.
-    <br>
-    </br>
-    <br>
-</br>
+        <b>Quantitative analysis of map detection.</b> The performance of map detection method and its NMP version on
+        the nuScenes validation set. Results show that by adding prior knowledge, the NMP enhances the quality of
+        VectorMapNet.
+        <br>
+        </br>
+        <br>
+        </br>
     <div class="logo" style="" align="center">
         <img style="max-width: 61.8%;" src="images/range.png">
     </div>
     <p>
-        <b>Comparison of model performance at different BEV ranges.</b> As the perception range increases, it is difficult for the online method to achieve good results; NMP significantly improves the results.
-    </p>    
+        <b>Comparison of model performance at different BEV ranges.</b> As the perception range increases, it is
+        difficult for the online method to achieve good results; NMP significantly improves the results.
+    </p>
     <br>
     </br>
     <div class="logo" style="" align="center">
         <img style="max-width: 61.8%;" src="images/weather.png">
     </div>
     <p>
-        <b>Performance in adverse weather conditions.</b> Neural map priors are particularly useful on rainy days and at night than in normal weather. 
-    </p>    
+        <b>Performance in adverse weather conditions.</b> Neural map priors are particularly useful on rainy days and at
+        night than in normal weather.
+    </p>
     <br>
     </br>
     <div class="logo" style="" align="center">
         <img style="max-width: 61.8%;" src="images/boston.png">
     </div>
     <p>
-        <b>Performance on Boston split.</b> The original split contains unbalanced historical trips for the training and validation sets; Boston split is more balanced.
-    </p>    
+        <b>Performance on Boston split.</b> The original split contains unbalanced historical trips for the training and
+        validation sets; Boston split is more balanced.
+    </p>
 </div>
-
 
 
 <div class="section">
     <div class="title" id="lang">Comparison</div>
-<!-- 
-    <div class="logo" style="" align="center">
-        <video controls preload="auto" width="100%"  autoplay loop playsinline class="html-video">
-            <source src="home/direction_3_car_short_small.mp4" type="video/mp4">
-            <p>Your browser doesn't support embedded videos, but don't worry, you can <a href="/HDMapNet/home/direction_3_car_short_small.mp4">download it</a> and watch it with your favorite video player!</p>
-        </video>
-    </div>
-    <p>
-        On the left are 6 surround images, on the right is the predicted HD map. We overlay the LiDAR point clouds on it for visualization purpose.
-    </p>
 
- -->    
 
     <div class="logo" style="" align="center">
         <img style="max-width: 83%;" src="images/nmp-figure-4.png">
     </div>
     <br>
-</br>
+    </br>
     <p>
-        <b>Qualitative results.</b> From the first to the fifth row: Ground truth, HDMapNet, BEVFormer, BEVFormer with Neural Map Prior and GRU weights. We also visualize z<sub>t</sub>, the attention map of the last step of the GRU fusion process. The model learns to selectively combine current and prior map features: specifically, when the prediction quality of the current frame is good, the network tends to learn a larger z<sub>t</sub>, assigning more weight to the current feature; when the prediction quality of the current frame is poor, usually at intersections or locations farther away from the ego-vehicle, the network tends to learn a smaller z<sub>t</sub> for the prior feature.
-    </p> 
+        <b>Qualitative results.</b> From the first to the fifth row: Ground truth, HDMapNet, BEVFormer, BEVFormer with
+        Neural Map Prior and GRU weights. We also visualize z<sub>t</sub>, the attention map of the last step of the GRU
+        fusion process. The model learns to selectively combine current and prior map features: specifically, when the
+        prediction quality of the current frame is good, the network tends to learn a larger z<sub>t</sub>, assigning
+        more weight to the current feature; when the prediction quality of the current frame is poor, usually at
+        intersections or locations farther away from the ego-vehicle, the network tends to learn a smaller z<sub>t</sub>
+        for the prior feature.
+    </p>
 </div>
 
 <!-- <div class="section">
@@ -259,41 +223,46 @@
 </div> -->
 
 <div class="section">
-    <div class="title" id="lang">Related Projects on <a href="https://vcad-ai.github.io/">VCAD (Vision-Centric Autonomous Driving)</a></div>
+    <div class="title" id="lang">Related Projects on <a href="https://vcad-ai.github.io/">VCAD (Vision-Centric
+        Autonomous Driving)</a></div>
     <div class="col text-center">
 
-    <table width="100%" style="margin: 0pt 0pt; text-align: center;">
-    <tr>
-      <td>
-          BEV Vectorized Mapping<br>
-          <a href="https://tsinghua-mars-lab.github.io/vectormapnet/" class="d-inline-block p-3"><img height="100"
-          src="images/VectorMapNet_thumbnail.png" style="border:1px solid"
-          data-nothumb><br>VectorMapNet</a>
-      </td>
-      
-      <td>
-        BEV Detection<br>
-        <a href="https://tsinghua-mars-lab.github.io/detr3d/" class="d-inline-block p-3"><img height="100"
-          src="images/detr3d_thumbnail.png" style="border:1px solid"
-          data-nothumb><br>DETR3D</a>
-      </td>
+        <table width="100%" style="margin: 0pt 0pt; text-align: center;">
+            <tr>
+                <td>
+                    BEV Vectorized Mapping<br>
+                    <a href="https://tsinghua-mars-lab.github.io/vectormapnet/" class="d-inline-block p-3"><img
+                            height="100"
+                            src="images/VectorMapNet_thumbnail.png" style="border:1px solid"
+                            data-nothumb><br>VectorMapNet</a>
+                </td>
 
-      <td>
-        BEV Fusion<br>
-      <a href="https://tsinghua-mars-lab.github.io/futr3d/" class="d-inline-block p-3"><img height="100"
-          src="images/futr3d_thumbnail.png" style="border:1px solid"
-          data-nothumb><br>FUTR3D</a>
-      </td>
+                <td>
+                    BEV Detection<br>
+                    <a href="https://tsinghua-mars-lab.github.io/detr3d/" class="d-inline-block p-3"><img height="100"
+                                                                                                          src="images/detr3d_thumbnail.png"
+                                                                                                          style="border:1px solid"
+                                                                                                          data-nothumb><br>DETR3D</a>
+                </td>
 
-      <td>
-        BEV Tracking<br>
-      <a href="https://tsinghua-mars-lab.github.io/mutr3d/" class="d-inline-block p-3"><img height="100"
-          src="images/mutr3d_thumbnail.png" style="border:1px solid"
-          data-nothumb><br>MUTR3D</a>
-      </td>
+                <td>
+                    BEV Fusion<br>
+                    <a href="https://tsinghua-mars-lab.github.io/futr3d/" class="d-inline-block p-3"><img height="100"
+                                                                                                          src="images/futr3d_thumbnail.png"
+                                                                                                          style="border:1px solid"
+                                                                                                          data-nothumb><br>FUTR3D</a>
+                </td>
 
-    </tr>
-    </table>
+                <td>
+                    BEV Tracking<br>
+                    <a href="https://tsinghua-mars-lab.github.io/mutr3d/" class="d-inline-block p-3"><img height="100"
+                                                                                                          src="images/mutr3d_thumbnail.png"
+                                                                                                          style="border:1px solid"
+                                                                                                          data-nothumb><br>MUTR3D</a>
+                </td>
+
+            </tr>
+        </table>
     </div>
 </div>
 
