@@ -60,10 +60,8 @@
         </tr>
     </table>
     <p>
-        The Neural Map Prior (NMP) is a novel learning-based system that employs a neural representation of global maps
-        to automatically update global maps and improve local map inference performance for autonomous vehicles through
-        cross-attention and learning-based fusion, resulting in stronger performance in adverse weather conditions and
-        longer horizons.
+        The Neural Map Prior (NMP) is a learning-based framework that employs a neural representation of global maps 
+        to improve local map inference performance for autonomous driving.
     </p>
 
 
@@ -92,12 +90,10 @@
 <div class="section">
     <div class="title" id="lang">Abstract</div>
     <p>
-        High-definition (HD) semantic maps are crucial for autonomous vehicles navigating urban environments.
-        Traditional offline HD maps, created through labor-intensive manual annotation processes, are both costly and
-        incapable of accommodating timely updates.
-        Recently, researchers have proposed inferring local maps based on online sensor observations; however, this
-        approach is constrained by the sensor perception range and is susceptible to occlusions. In this work, we
-        propose Neural Map Prior (NMP), a neural representation of global maps that facilitates automatic global map
+        Traditional offline HD maps, created through manual annotation processes, are both costly and
+        incapable of accommodating timely updates. On the other hand, online map inference methods
+        are constrained by the sensor perception range and is susceptible to occlusions. 
+        We propose Neural Map Prior (NMP), a neural representation of global maps that facilitates automatic global map
         updates and improves local map inference performance.
         To incorporate the strong map prior into local map inference, we employ cross-attention that dynamically
         captures correlations between current features and prior features. For updating the global neural map prior, we
@@ -115,7 +111,7 @@
     <div class="title" id="lang">Main Idea</div>
     <img src="images/nmp-figure-1.png" style="max-width: 100%;">
     <p>
-        <b>Main idea</b>. Traditional offline semantic mapping pipelines (first row from left) involve a complex manual
+        <b>Main idea</b>. Traditional offline semantic mapping methods (first row from left) involve a complex manual
         annotation pipeline and do not support timely map updates. Online HD semantic map learning methods (second row
         from left) rely entirely on onboard sensor observations and are susceptible to occlusions. We propose the Neural
         Map Prior (on the right), an innovative neural representation of global maps designed to aid onboard map
