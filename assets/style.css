@@ -4,7 +4,7 @@ body {
   color: #ffffff;
   font-family: 'Lato', Verdana, 'Helvetica', sans-serif;
   font-weight: 300;
-  font-size: 11pt;
+  font-size: 10pt;
 }
 
 /* Hyperlinks */
@@ -52,7 +52,7 @@ pre {
 .section .header .title {
   /*margin: 0 60pt;*/
   text-align: center;
-  font-size: 22pt;
+  font-size: 20pt;
 }
 
 /* Author */
