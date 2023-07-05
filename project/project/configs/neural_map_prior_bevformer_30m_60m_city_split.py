@@ -1,15 +1,15 @@
 """
-BEVformer map baseline with resnet101 backbone
+BEVformer map baseline with resnet101 backbone and neural map prior
 """
 
 _base_ = [
     './default_runtime.py'
 ]
 
-# 23863MB for single-GPU training
+# TODO 23863MB for single-GPU training
 plugin = True
 plugin_dir = 'project/neural_map_prior/'
-# find_unused_parameters = False
+find_unused_parameters = True
 # sync_bn = True
 
 
@@ -97,11 +97,31 @@ bevformer_cfg = dict(
     point_cloud_range=[-15.0, -30.0, -5.0, 15.0, 30.0, 3.0],
 )
 
+map_attribute = {
+    'root_dir': '/localdata_ssd/map_slices/raster_global_map',
+    'type': 'rasterized',
+    'prefix': 'map_large_reso_gru_cpu',
+    'tile_param': {
+        'data_type': 'float32',
+        'embed_dims': 256,
+        'num_traversals': 1, },
+    'batch_size': 8,
+    'single_gpu': False,
+    'global_map_tile_size': [4, 4],
+    'global_map_raster_size': [0.30, 0.30],
+    'nusc_city_split': True,
+}
+sort_train_infos = True
+sort_val_infos = True
+sort_batch_size = map_attribute['batch_size']
+
 model = dict(
-    type='OriginalHDMapNet',
+    type='NeuralMapPrior',
     map_bev_attrs=map_bev_attrs,
     dist_cfg=False,
-    open_nmp=False,
+    map_attribute=map_attribute,
+    open_nmp=True,
+    use_centerness=True,
     img_backbone=dict(
         type='ResNet',
         depth=101,
@@ -128,6 +148,18 @@ model = dict(
         add_extra_convs='on_output',
         num_outs=bevformer_cfg['_num_levels_'],
         relu_before_extra_convs=True),
+    positional_encoding_prior=dict(
+        type='LearnedPositionalEncoding',
+        num_feats=bevformer_cfg['_pos_dim_'],
+        row_num_embed=map_bev_attrs['bev_h_'],
+        col_num_embed=map_bev_attrs['bev_w_'],
+    ),
+    positional_encoding_cur=dict(
+        type='LearnedPositionalEncoding',
+        num_feats=bevformer_cfg['_pos_dim_'],
+        row_num_embed=map_bev_attrs['bev_h_'],
+        col_num_embed=map_bev_attrs['bev_w_'],
+    ),
     view_transformation_cfg=dict(
         type='BEVFormer',
         embed_dims=bevformer_dim,
@@ -148,7 +180,7 @@ model = dict(
             num_points_in_pillar=4,
             return_intermediate=False,
             transformerlayers=dict(
-                type='BEVFormerLayer',
+                type='MapPriorLayer',
                 attn_cfgs=[
                     dict(type='TemporalSelfAttention',
                          embed_dims=bevformer_dim,
@@ -162,11 +194,19 @@ model = dict(
                               num_levels=bevformer_cfg['_num_levels_']),
                          embed_dims=bevformer_dim,
                          ),
+                    dict(
+                        type='WindowCrossAttention',
+                        num_bev_win_h=10,
+                        num_bev_win_w=20,
+                        bev_h=map_bev_attrs['bev_h_'],
+                        bev_w=map_bev_attrs['bev_w_'],
+                        embed_dims=bevformer_dim,
+                    )
                 ],
                 feedforward_channels=bevformer_cfg['_ffn_dim_'],
                 ffn_dropout=0.1,
                 operation_order=('self_attn', 'norm',
-                                 'cross_attn', 'norm',
+                                 'cross_attn', 'win_cross_attn', 'norm',
                                  'ffn', 'norm')
             )
         ),
@@ -278,8 +318,11 @@ data = dict(
         modality=input_modality,
         eval_cfg=eval_cfg,
         rasterized_cfg=rasterized_cfg,
-        origin_sampler=True,
-        nusc_new_split=True,
+        sort_train_infos=sort_train_infos,
+        sort_val_infos=sort_val_infos,
+        sort_batch_size=sort_batch_size,
+        gm_grid_size=map_attribute['global_map_tile_size'],
+        nusc_city_split=True,
     ),
     val=dict(
         type='nuScenesMapDataset',
@@ -289,8 +332,11 @@ data = dict(
         modality=input_modality,
         eval_cfg=eval_cfg,
         rasterized_cfg=rasterized_cfg,
-        origin_sampler=True,
-        nusc_new_split=True,
+        sort_train_infos=sort_train_infos,
+        sort_val_infos=sort_val_infos,
+        sort_batch_size=sort_batch_size,
+        gm_grid_size=map_attribute['global_map_tile_size'],
+        nusc_city_split=True,
     ),
     test=dict(
         type='nuScenesMapDataset',
@@ -301,10 +347,14 @@ data = dict(
         eval_cfg=eval_cfg,
         rasterized_cfg=rasterized_cfg,
         samples_per_gpu=1,
-        origin_sampler=True,
-        nusc_new_split=True,
+        sort_train_infos=sort_train_infos,
+        sort_val_infos=sort_val_infos,
+        sort_batch_size=sort_batch_size,
+        gm_grid_size=map_attribute['global_map_tile_size'],
+        nusc_city_split=True,
     ),
 )
+custom_hooks = [dict(type='SetEpochInfoHook', priority='VERY_HIGH', interval=1)]
 
 optimizer = dict(
     type='AdamW',
@@ -328,6 +378,6 @@ evaluation = dict(interval=1)
 
 runner = dict(type='EpochBasedRunner', max_epochs=24)
 
-load_from = 'ckpts/r101_dcn_fcos3d_pretrain.pth'
+load_from = '/oldhome/xiongx/repository/neural_map_prior_code/work_dirs/bevformer_30m_60m_city_split/epoch_24.pth'
 
 file_client_args = dict(backend='disk')

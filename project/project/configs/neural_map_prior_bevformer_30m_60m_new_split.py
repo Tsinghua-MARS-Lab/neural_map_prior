@@ -109,6 +109,7 @@ map_attribute = {
     'single_gpu': False,
     'global_map_tile_size': [4, 4],
     'global_map_raster_size': [0.30, 0.30],
+    'nusc_new_split': True,
 }
 sort_train_infos = True
 sort_val_infos = True
@@ -321,6 +322,7 @@ data = dict(
         sort_val_infos=sort_val_infos,
         sort_batch_size=sort_batch_size,
         gm_grid_size=map_attribute['global_map_tile_size'],
+        nusc_new_split=True,
     ),
     val=dict(
         type='nuScenesMapDataset',
@@ -334,6 +336,7 @@ data = dict(
         sort_val_infos=sort_val_infos,
         sort_batch_size=sort_batch_size,
         gm_grid_size=map_attribute['global_map_tile_size'],
+        nusc_new_split=True,
     ),
     test=dict(
         type='nuScenesMapDataset',
@@ -348,6 +351,7 @@ data = dict(
         sort_val_infos=sort_val_infos,
         sort_batch_size=sort_batch_size,
         gm_grid_size=map_attribute['global_map_tile_size'],
+        nusc_new_split=True,
     ),
 )
 custom_hooks = [dict(type='SetEpochInfoHook', priority='VERY_HIGH', interval=1)]
@@ -374,6 +378,6 @@ evaluation = dict(interval=1)
 
 runner = dict(type='EpochBasedRunner', max_epochs=24)
 
-load_from = '/oldhome/xiongx/repository/neural_map_prior_code/work_dirs/bevformer_30m_60m/epoch_24.pth'
+load_from = '/oldhome/xiongx/repository/neural_map_prior_code/work_dirs/bevformer_30m_60m_tianyuan/epoch_24.pth'
 
 file_client_args = dict(backend='disk')

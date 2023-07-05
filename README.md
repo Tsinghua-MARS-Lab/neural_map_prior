@@ -2,21 +2,21 @@
 
 ### [arXiv Paper](https://arxiv.org/abs/2304.08481) | [CVF Paper](https://openaccess.thecvf.com/content/CVPR2023/papers/Xiong_Neural_Map_Prior_for_Autonomous_Driving_CVPR_2023_paper.pdf) | [Webpage](https://tsinghua-mars-lab.github.io/neural_map_prior/) | [5-min Video](https://www.youtube.com/watch?v=FpzxaBVw3L0)
 
-[Xuan Xiong](), [Yicheng Liu](https://scholar.google.com.hk/citations?hl=en&user=vRmsgQUAAAAJ), [Tianyuan Yuan](), [Yue Wang](https://people.csail.mit.edu/yuewang/), [Yilun Wang](https://scholar.google.com.hk/citations?user=nUyTDosAAAAJ&hl=en/), [Hang Zhao](http://people.csail.mit.edu/hangzhao/)
+[Xuan Xiong](), [Yicheng Liu](https://scholar.google.com.hk/citations?hl=en&user=vRmsgQUAAAAJ), [Tianyuan Yuan](), [Yue Wang](https://people.csail.mit.edu/yuewang/), [Yilun Wang](https://scholar.google.com.hk/citations?user=nUyTDosAAAAJ&hl=en/), [Hang Zhao*](http://people.csail.mit.edu/hangzhao/)
 
 ## Introduction
 
 A neural representation of HD maps to improve local map inference performance for autonomous driving.
 
-This repo is official implementation of "Neural Map Prior for Autonomous
-Driving". Our main contributions are:
+This repo is the official implementation of __"Neural Map Prior for Autonomous
+Driving"__(CVPR 2023). Our main contributions are:
 
 * __A novel mapping paradigm__: integrates the __maintenance of global maps__ and
   the __inference of online local maps__.
 * __Efficient fusion modules__:  __current-to-prior attention__ and __gated recurrent unit__ modules facilitate
   the efficient fusion of global and local map features.
 * __Easy integration with HD map learning methods__: Neural Map Prior can be easily applied to various map segmentation
-  and detection methods. Simple replacement for you online map inference model in your novel algorithms. Moreover, our
+  and detection methods. Simple replacement for your online map inference model in your novel algorithms. Moreover, our
   approach demonstrates significant advancements in challenging scenarios, such as __bad weather conditions__
   and __longer perception ranges__.
 * __Sparse map tiles__: a memory-efficient approach for storing neural representations of city-scale HD maps.
