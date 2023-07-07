@@ -1,6 +1,6 @@
 # Neural Map Prior for Autonomous Driving (CVPR 2023)
 
-### [arXiv Paper](https://arxiv.org/abs/2304.08481) | [CVF Paper](https://openaccess.thecvf.com/content/CVPR2023/papers/Xiong_Neural_Map_Prior_for_Autonomous_Driving_CVPR_2023_paper.pdf) | [Webpage](https://tsinghua-mars-lab.github.io/neural_map_prior/) | [5-min Video](https://www.youtube.com/watch?v=FpzxaBVw3L0) | [Poster](https://drive.google.com/file/d/1_QfH4biGliakV37st_y-RmvaPsSFugcj/view?usp=drive_link)
+### [![arXiv Paper](https://img.shields.io/badge/arXiv-Paper-<COLOR>.svg)](https://arxiv.org/abs/2304.08481) | [CVF Paper](https://openaccess.thecvf.com/content/CVPR2023/papers/Xiong_Neural_Map_Prior_for_Autonomous_Driving_CVPR_2023_paper.pdf) | [Webpage](https://tsinghua-mars-lab.github.io/neural_map_prior/) | [5-min Video](https://www.youtube.com/watch?v=FpzxaBVw3L0) | [Poster](https://drive.google.com/file/d/1_QfH4biGliakV37st_y-RmvaPsSFugcj/view?usp=drive_link)
 
 [Xuan Xiong](), [Yicheng Liu](https://scholar.google.com.hk/citations?hl=en&user=vRmsgQUAAAAJ), [Tianyuan Yuan](), [Yue Wang](https://people.csail.mit.edu/yuewang/), [Yilun Wang](https://scholar.google.com.hk/citations?user=nUyTDosAAAAJ&hl=en/), [Hang Zhao*](http://people.csail.mit.edu/hangzhao/)
 
@@ -92,14 +92,14 @@ We would like to thank all who contributed to the open-source projects listed be
 get done without the inspiration of these outstanding researchers and developers.
 
 * BEV
-  Perception: [BEVFormer](https://github.com/fundamentalvision/BEVFormer), [Lift, Splat, Shoot](https://github.com/nv-tlabs/lift-splat-shoot)
+  Perception: [BEVFormer](https://github.com/fundamentalvision/BEVFormer)![GitHub stars](https://img.shields.io/github/stars/fundamentalvision/BEVFormer.svg?style=flat&label=Star), [Lift, Splat, Shoot](https://github.com/nv-tlabs/lift-splat-shoot)![GitHub stars](https://img.shields.io/github/stars/nv-tlabs/lift-splat-shoot.svg?style=flat&label=Star)
 * HD Map
-  Learning: [HDMapNet](https://github.com/Tsinghua-MARS-Lab/HDMapNet), [VectorMapNet](https://github.com/Mrmoore98/VectorMapNet_code/tree/mian)
-* Vision Transformer: [Swin Transformer](https://github.com/microsoft/Swin-Transformer)
+  Learning: [HDMapNet](https://github.com/Tsinghua-MARS-Lab/HDMapNet)![GitHub stars](https://img.shields.io/github/stars/Tsinghua-MARS-Lab/HDMapNet.svg?style=flat&label=Star), [VectorMapNet](https://github.com/Mrmoore98/VectorMapNet_code/tree/mian)![GitHub stars](https://img.shields.io/github/stars/Mrmoore98/VectorMapNet_code.svg?style=flat&label=Star)
+* Vision Transformer: [Swin Transformer](https://github.com/microsoft/Swin-Transformer)![GitHub stars](https://img.shields.io/github/stars/microsoft/Swin-Transformer.svg?style=flat&label=Star)
 * [open-mmlab](https://github.com/open-mmlab)
 
 The designate `project/neural_map_prior` as a module is inspired by the implementations
-of [DETR3D](https://github.com/WangYueFt/detr3d).
+of [DETR3D](https://github.com/WangYueFt/detr3d)![GitHub stars](https://img.shields.io/github/stars/WangYueFt/detr3d.svg?style=flat&label=Star).
 
 ## Citation
 
