@@ -58,10 +58,10 @@ We experiment with BEVFormer, lift-spat-shoot, HDMapNet and VectorMapNet archite
 
 ### HD semantic map [BEVFormer] (on nuScenes validation)
 
-|        Model        | Modality | Divider | Crossing | Boundary | All(mIoU) |                                        Checkpoint Link                                         |
+|    Model Config     | Modality | Divider | Crossing | Boundary | All(mIoU) |                                        Checkpoint Link                                         |
 |:-------------------:|:--------:|:-------:|:--------:|:--------:|:---------:|:----------------------------------------------------------------------------------------------:|
-|    [BEVFormer]()    |  Camera  |  49.20  |  28.67   |  50.43   |   42.76   | [model](https://drive.google.com/file/d/1OPiyPl7GbnopDL56D4dgXAW9Dbl1wGko/view?usp=drive_link) |
-| [BEVFormer + NMP]() |  Camera  |  54.20  |  34.52   |  56.94   |   48.55   | [model](https://drive.google.com/file/d/1qPvhDICbaNVs86K-n8x1NRfyLylI_xFm/view?usp=drive_link) |
+|    [BEVFormer](project/configs/bevformer_30m_60m.py)    |  Camera  |  49.20  |  28.67   |  50.43   |   42.76   | [model](https://drive.google.com/file/d/1OPiyPl7GbnopDL56D4dgXAW9Dbl1wGko/view?usp=drive_link) |
+| [BEVFormer + NMP](project/configs/neural_map_prior_bevformer_30m_60m.py) |  Camera  |  54.20  |  34.52   |  56.94   |   48.55   | [model](https://drive.google.com/file/d/1qPvhDICbaNVs86K-n8x1NRfyLylI_xFm/view?usp=drive_link) |
 
 ## Installation
 
@@ -116,5 +116,5 @@ If you find neural_map_prior useful in your research or applications, please con
 
 ## License
 
-This project is released under the Apache 2.0 license - see the [LICENSE](LICENSE) file for details.
+This project is released under the [Apache 2.0 license](LICENSE).
 

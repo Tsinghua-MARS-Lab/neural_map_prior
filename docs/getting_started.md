@@ -1,6 +1,13 @@
 # Getting started with Neural Map Prior
 
-## Add custom data_sampler
+## Before training
+
+### step 1. computation requirements
+
+Make sure that you have over 50GB of memory available. It is required to create map tiles for the four cities in nuScene
+in the training and testing process.
+
+### step 2. add custom data_sampler
 
 In our setup, we need to manually replace mmdet `mmdet/apis/train.py` with ours `tools/mmdet_train.py` to add a new
 custom data_sampler.
