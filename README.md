@@ -4,29 +4,27 @@
 
 [Xuan Xiong](), [Yicheng Liu](https://scholar.google.com.hk/citations?hl=en&user=vRmsgQUAAAAJ), [Tianyuan Yuan](), [Yue Wang](https://people.csail.mit.edu/yuewang/), [Yilun Wang](https://scholar.google.com.hk/citations?user=nUyTDosAAAAJ&hl=en/), [Hang Zhao*](http://people.csail.mit.edu/hangzhao/)
 
-[//]: # (## Table of Contents)
+## Table of Contents
 
-[//]: # ()
+- [Introduction](#Intro)
 
-[//]: # (- [Introduction]&#40;#Intro&#41;)
+- [Model Zoo](#Model-Zoo)
 
-[//]: # (- [Model Zoo]&#40;#Model-Zoo&#41;)
+- [Installation](#Installation)
 
-[//]: # (- [Installation]&#40;#Installation&#41;)
+- [Getting Started](#Getting-Started)
 
-[//]: # (- [Getting Started]&#40;#Getting-Started&#41;)
+- [Architecture](#Architecture)
 
-[//]: # (- [Architecture]&#40;#Architecture&#41;)
+- [Contact](#Contact)
 
-[//]: # (- [Contact]&#40;#Contact&#41;)
+- [Acknowledgement](#Acknowledgement)
 
-[//]: # (- [Acknowledgement]&#40;#Acknowledgement&#41;)
+- [Citation](#Citation)
 
-[//]: # (- [Citation]&#40;#Citation&#41;)
+- [License](#License)
 
-[//]: # (- [License]&#40;#License&#41;)
-
-## Highlights<a name="Intro"></a>
+## Introduction<a name="Intro"></a>
 
 A neural representation of HD maps to improve local map inference performance for autonomous driving.
 
