@@ -58,9 +58,9 @@ We experiment with BEVFormer, lift-spat-shoot, HDMapNet and VectorMapNet archite
 
 ### HD semantic map [BEVFormer] (on nuScenes validation)
 
-|    Model Config     | Modality | Divider | Crossing | Boundary | All(mIoU) |                                        Checkpoint Link                                         |
-|:-------------------:|:--------:|:-------:|:--------:|:--------:|:---------:|:----------------------------------------------------------------------------------------------:|
-|    [BEVFormer](project/configs/bevformer_30m_60m.py)    |  Camera  |  49.20  |  28.67   |  50.43   |   42.76   | [model](https://drive.google.com/file/d/1OPiyPl7GbnopDL56D4dgXAW9Dbl1wGko/view?usp=drive_link) |
+|                               Model Config                               | Modality | Divider | Crossing | Boundary | All(mIoU) |                                        Checkpoint Link                                         |
+|:------------------------------------------------------------------------:|:--------:|:-------:|:--------:|:--------:|:---------:|:----------------------------------------------------------------------------------------------:|
+|            [BEVFormer](project/configs/bevformer_30m_60m.py)             |  Camera  |  49.20  |  28.67   |  50.43   |   42.76   | [model](https://drive.google.com/file/d/1OPiyPl7GbnopDL56D4dgXAW9Dbl1wGko/view?usp=drive_link) |
 | [BEVFormer + NMP](project/configs/neural_map_prior_bevformer_30m_60m.py) |  Camera  |  54.20  |  34.52   |  56.94   |   48.55   | [model](https://drive.google.com/file/d/1qPvhDICbaNVs86K-n8x1NRfyLylI_xFm/view?usp=drive_link) |
 
 ## Installation
@@ -78,7 +78,7 @@ Please check [getting_started](docs/getting_started.md) for training, evaluation
 
 ## Architecture
 
-![visualization](figs/arch.png "Results on nuScenes")
+![visualization](figs/arch.png)
 
 ## Contact
 
