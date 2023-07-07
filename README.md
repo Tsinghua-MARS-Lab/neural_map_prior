@@ -13,13 +13,13 @@
 
 ## Table of Contents
 
-- [Introduction](#Intro)
+- [Introduction](#Introduction)
 - [Model Zoo](#Model-Zoo)
 - [Installation](#Installation)
 - [Getting Started](#Getting-Started)
 - [Architecture](#Architecture)
 - [Contact](#Contact)
-- [Acknowledgement](#Acknowledgement)
+- [Acknowledgements](#Acknowledgements)
 - [Citation](#Citation)
 - [License](#License)
 
