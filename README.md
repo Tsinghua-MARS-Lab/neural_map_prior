@@ -7,21 +7,13 @@
 ## Table of Contents
 
 - [Introduction](#Intro)
-
 - [Model Zoo](#Model-Zoo)
-
 - [Installation](#Installation)
-
 - [Getting Started](#Getting-Started)
-
 - [Architecture](#Architecture)
-
 - [Contact](#Contact)
-
 - [Acknowledgement](#Acknowledgement)
-
 - [Citation](#Citation)
-
 - [License](#License)
 
 ## Introduction<a name="Intro"></a>
