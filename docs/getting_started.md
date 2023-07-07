@@ -22,8 +22,22 @@ bash tools/dist_train.sh $CONFIG 8
 
 For example, if you want to train baseline and neural_map_prior with 8 GPUs on nuScenes dataset, run:
 
+### Stage 1: Obtain the baseline
+
+We begin by training the BEV feature extraction module to achieve stable weight initialization for the following stage.
+
 ```bash
 bash tools/dist_train.sh project/configs/bevformer_30m_60m.py 8
+```
+
+### Stage 2: Finetune with NMP
+
+Based on the last epoch obtained by the baseline training (epoch_24 in our setting), which is set in `load_from` in
+config, fine-tune another 24 epochs to achieve the NMP advantage brought to the table. In the time of fine-tuning, we
+freeze the training of the backbone and neck.
+(We found the results of baseline training at epoch 24 or epoch 100 to be similar, so fine-tuning is fine.)
+
+```bash
 bash tools/dist_train.sh project/configs/neural_map_prior_bevformer_30m_60m.py 8
 ```
 
@@ -47,6 +61,11 @@ For example, if you want to evaluate the baseline and neural_map_prior with 8 GP
 
 ```bash
 bash tools/dist_test.sh project/configs/bevformer_30m_60m.py $YOUR_CKPT 8 --eval iou
+```
+
+(To evaluate neural_map_prior, Be careful to set the appropriate `data_sample.py` that needs to be used in NMP.)
+
+```bash
 bash tools/dist_test.sh project/configs/neural_map_prior_bevformer_30m_60m.py $YOUR_CKPT 8 --eval iou
 ```
 

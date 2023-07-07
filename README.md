@@ -4,7 +4,29 @@
 
 [Xuan Xiong](), [Yicheng Liu](https://scholar.google.com.hk/citations?hl=en&user=vRmsgQUAAAAJ), [Tianyuan Yuan](), [Yue Wang](https://people.csail.mit.edu/yuewang/), [Yilun Wang](https://scholar.google.com.hk/citations?user=nUyTDosAAAAJ&hl=en/), [Hang Zhao*](http://people.csail.mit.edu/hangzhao/)
 
-## Introduction
+[//]: # (## Table of Contents)
+
+[//]: # ()
+
+[//]: # (- [Introduction]&#40;#Intro&#41;)
+
+[//]: # (- [Model Zoo]&#40;#Model-Zoo&#41;)
+
+[//]: # (- [Installation]&#40;#Installation&#41;)
+
+[//]: # (- [Getting Started]&#40;#Getting-Started&#41;)
+
+[//]: # (- [Architecture]&#40;#Architecture&#41;)
+
+[//]: # (- [Contact]&#40;#Contact&#41;)
+
+[//]: # (- [Acknowledgement]&#40;#Acknowledgement&#41;)
+
+[//]: # (- [Citation]&#40;#Citation&#41;)
+
+[//]: # (- [License]&#40;#License&#41;)
+
+## Introduction<a name="Intro"></a>
 
 A neural representation of HD maps to improve local map inference performance for autonomous driving.
 
@@ -81,7 +103,7 @@ of [DETR3D](https://github.com/WangYueFt/detr3d).
 
 ## Citation
 
-If you find neural_map_prior useful in your research or applications, please consider giving us a star 🌟 and citing:
+If you find neural_map_prior useful in your research or applications, please consider citing:
 
 ```
 @inproceedings{xiong2023neuralmapprior,
