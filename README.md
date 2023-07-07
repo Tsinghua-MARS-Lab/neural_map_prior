@@ -26,7 +26,7 @@
 
 [//]: # (- [License]&#40;#License&#41;)
 
-## Introduction<a name="Intro"></a>
+## Highlights<a name="Intro"></a>
 
 A neural representation of HD maps to improve local map inference performance for autonomous driving.
 
@@ -84,7 +84,7 @@ Please check [getting_started](docs/getting_started.md) for training, evaluation
 
 Any questions or suggestions are welcome!
 
-Xuan Xiong [abby.xxn@outlook.com](abby.xxn@outlook.com)
+* __Xuan Xiong__ [abby.xxn@outlook.com](abby.xxn@outlook.com)
 
 ## Acknowledgements
 
@@ -95,7 +95,8 @@ get done without the inspiration of these outstanding researchers and developers
   Perception: [BEVFormer](https://github.com/fundamentalvision/BEVFormer)![GitHub stars](https://img.shields.io/github/stars/fundamentalvision/BEVFormer.svg?style=flat&label=Star), [Lift, Splat, Shoot](https://github.com/nv-tlabs/lift-splat-shoot)![GitHub stars](https://img.shields.io/github/stars/nv-tlabs/lift-splat-shoot.svg?style=flat&label=Star)
 * HD Map
   Learning: [HDMapNet](https://github.com/Tsinghua-MARS-Lab/HDMapNet)![GitHub stars](https://img.shields.io/github/stars/Tsinghua-MARS-Lab/HDMapNet.svg?style=flat&label=Star), [VectorMapNet](https://github.com/Mrmoore98/VectorMapNet_code/tree/mian)![GitHub stars](https://img.shields.io/github/stars/Mrmoore98/VectorMapNet_code.svg?style=flat&label=Star)
-* Vision Transformer: [Swin Transformer](https://github.com/microsoft/Swin-Transformer)![GitHub stars](https://img.shields.io/github/stars/microsoft/Swin-Transformer.svg?style=flat&label=Star)
+* Vision
+  Transformer: [Swin Transformer](https://github.com/microsoft/Swin-Transformer)![GitHub stars](https://img.shields.io/github/stars/microsoft/Swin-Transformer.svg?style=flat&label=Star)
 * [open-mmlab](https://github.com/open-mmlab)
 
 The designate `project/neural_map_prior` as a module is inspired by the implementations
@@ -116,5 +117,5 @@ If you find neural_map_prior useful in your research or applications, please con
 
 ## License
 
-This project is released under the [Apache 2.0 license](LICENSE).
+This project is licensed under the [Apache 2.0 license](LICENSE).
 
