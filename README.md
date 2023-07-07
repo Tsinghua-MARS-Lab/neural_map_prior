@@ -6,7 +6,7 @@
 
 [//]: # (![github-demo.gif]&#40;figs/github-demo.gif&#41;)
 
-[![Watch the video](https://img.youtube.com/vi/OhHGzpQTifo/default.jpg)](https://www.youtube.com/watch?v=OhHGzpQTifo)
+[![Watch the video](https://img.youtube.com/vi/OhHGzpQTifo/maxresdefault.jpg)](https://www.youtube.com/watch?v=OhHGzpQTifo)
 
 
 [//]: # (![multi-trip fusion]&#40;figs/github-demo.gif&#41;)
