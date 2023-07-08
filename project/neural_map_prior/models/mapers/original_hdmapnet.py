@@ -1,7 +1,7 @@
 import torch
 from torch import nn
 
-from mmdet3d.models.builder import build_backbone, build_head, build_neck, MAPPERS
+from mmdet3d.models.builder import build_backbone, build_head, build_neck, DETECTORS
 from project.neural_map_prior.map_tiles.lane_render import gen_matrix
 from project.neural_map_prior.models.mapers.base_mapper import BaseMapper
 from project.neural_map_prior.models.mapers.loss_utils import HdmapNetLosses
@@ -10,7 +10,7 @@ from project.neural_map_prior.models.modules.gru_fusion import ConvGRU
 from mmcv.cnn.bricks.transformer import build_positional_encoding
 
 
-@MAPPERS.register_module()
+@DETECTORS.register_module()
 class NeuralMapPrior(BaseMapper):
 
     def __init__(self,

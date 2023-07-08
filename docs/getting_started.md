@@ -17,7 +17,7 @@ If you know how to add a new data_sampler through config, please let us know thr
 
 Neural map prior incorporates BEVFormer with ResNet101 backbone as the baseline, using the weight initialization from
 the ckpts/r101_dcn_fcos3d_pretrain.pth files. It can be downloaded
-from [here](https://drive.google.com/file/d/1bkiDxA97XvhnRQnGB44ol3xwhVjGcffu/view?usp=drive_link).
+from [here](https://drive.google.com/file/d/1bkiDxA97XvhnRQnGB44ol3xwhVjGcffu/view?usp=sharing).
 
 ### Multi-GPU training
 
@@ -84,7 +84,8 @@ python tools/test.py $YOUR_CONFIG $YOUR_CKPT --eval iou
 
 ## Visualization
 
-To visualize the predictions, run:
+To visualize the predictions, you can first try with nmp_results, which you can download from [here](https://drive.google.com/file/d/1vcajqEPfIJ_Vb4jrG4umoKY_qp3ZrsCE/view?usp=sharing), and run:
+
 
 ```bash
 python project/neural_map_prior/map_tiles/lane_render.py

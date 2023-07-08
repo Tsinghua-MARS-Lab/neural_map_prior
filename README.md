@@ -1,6 +1,6 @@
 # Neural Map Prior for Autonomous Driving (CVPR 2023)
 
-### [![arXiv Paper](https://img.shields.io/badge/arXiv-Paper-<COLOR>.svg)](https://arxiv.org/abs/2304.08481) | [CVF Paper](https://openaccess.thecvf.com/content/CVPR2023/papers/Xiong_Neural_Map_Prior_for_Autonomous_Driving_CVPR_2023_paper.pdf) | [Webpage](https://tsinghua-mars-lab.github.io/neural_map_prior/) | [5-min Video](https://www.youtube.com/watch?v=FpzxaBVw3L0) | [Poster](https://drive.google.com/file/d/1_QfH4biGliakV37st_y-RmvaPsSFugcj/view?usp=drive_link)
+### [![arXiv Paper](https://img.shields.io/badge/arXiv-Paper-<COLOR>.svg)](https://arxiv.org/abs/2304.08481) | [CVF Paper](https://openaccess.thecvf.com/content/CVPR2023/papers/Xiong_Neural_Map_Prior_for_Autonomous_Driving_CVPR_2023_paper.pdf) | [Webpage](https://tsinghua-mars-lab.github.io/neural_map_prior/) | [5-min Video](https://www.youtube.com/watch?v=FpzxaBVw3L0) | [Poster](https://drive.google.com/file/d/1_QfH4biGliakV37st_y-RmvaPsSFugcj/view?usp=sharing)
 
 [Xuan Xiong](), [Yicheng Liu](https://scholar.google.com.hk/citations?hl=en&user=vRmsgQUAAAAJ), [Tianyuan Yuan](), [Yue Wang](https://people.csail.mit.edu/yuewang/), [Yilun Wang](https://scholar.google.com.hk/citations?user=nUyTDosAAAAJ&hl=en/), [Hang Zhao*](http://people.csail.mit.edu/hangzhao/)
 
@@ -55,10 +55,10 @@ We experiment with BEVFormer, lift-spat-shoot, HDMapNet and VectorMapNet archite
 
 ### HD semantic map [BEVFormer] (on nuScenes validation)
 
-|                               Model Config                               | Modality | Divider | Crossing | Boundary | All(mIoU) |                                        Checkpoint Link                                         |
-|:------------------------------------------------------------------------:|:--------:|:-------:|:--------:|:--------:|:---------:|:----------------------------------------------------------------------------------------------:|
-|            [BEVFormer](project/configs/bevformer_30m_60m.py)             |  Camera  |  49.20  |  28.67   |  50.43   |   42.76   | [model](https://drive.google.com/file/d/1OPiyPl7GbnopDL56D4dgXAW9Dbl1wGko/view?usp=drive_link) |
-| [BEVFormer + NMP](project/configs/neural_map_prior_bevformer_30m_60m.py) |  Camera  |  54.20  |  34.52   |  56.94   |   48.55   | [model](https://drive.google.com/file/d/1qPvhDICbaNVs86K-n8x1NRfyLylI_xFm/view?usp=drive_link) |
+|                               Model Config                               | Modality | Divider | Crossing | Boundary | All(mIoU) |                                       Checkpoint Link                                       |
+|:------------------------------------------------------------------------:|:--------:|:-------:|:--------:|:--------:|:---------:|:-------------------------------------------------------------------------------------------:|
+|            [BEVFormer](project/configs/bevformer_30m_60m.py)             |  Camera  |  49.20  |  28.67   |  50.43   |   42.76   | [model](https://drive.google.com/file/d/1OPiyPl7GbnopDL56D4dgXAW9Dbl1wGko/view?usp=sharing) |
+| [BEVFormer + NMP](project/configs/neural_map_prior_bevformer_30m_60m.py) |  Camera  |  54.20  |  34.52   |  56.94   |   48.55   | [model](https://drive.google.com/file/d/1qPvhDICbaNVs86K-n8x1NRfyLylI_xFm/view?usp=sharing) |
 
 ## Installation
 
