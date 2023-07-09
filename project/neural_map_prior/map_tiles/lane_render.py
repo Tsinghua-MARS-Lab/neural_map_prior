@@ -193,8 +193,7 @@ def get_coords_resample(bev_feature,
 
 def load_nusc_data_infos(dataset, root=None):
     if root is None:
-        root = '/public/MARS/datasets/nuScenes'
-    # with open(f'{root}/nuscenes_infos_temporal_{dataset}.pkl', 'rb') as f:
+        root = '~/neural_map_prior/data/nuscenes/'
     with open(f'{root}/nuScences_map_trainval_infos_{dataset}.pkl', 'rb') as f:
         infos = pkl.load(f)['infos']
     print(f'load {len(infos)} {dataset} data infos for nuscenes dataset...')
@@ -203,8 +202,8 @@ def load_nusc_data_infos(dataset, root=None):
 
 def load_nusc_data_cities(dataset, root=None):
     if root is None:
-        root = '/home/xiongx/repository/marsmap/global_map_construction'
-    with open(f'{root}/{dataset}_infos_cityname.pkl', 'rb') as f:
+        root = '~/neural_map_prior/data/nuscenes_infos'
+    with open(f'{root}/{dataset}_city_infos.pkl', 'rb') as f:
         data_city_names = pkl.load(f)
     print(f'load {len(data_city_names)} {dataset} city names for nuscenes dataset...')
     return data_city_names

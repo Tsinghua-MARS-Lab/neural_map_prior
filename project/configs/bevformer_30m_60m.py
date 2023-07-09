@@ -15,8 +15,8 @@ plugin_dir = 'project/neural_map_prior/'
 
 # data root and data info path for dataset
 version = 'trainval'  # 'mini' or 'trainval'
-data_root = '/public/MARS/datasets/nuScenes/'
-data_info_path = '/public/MARS/datasets/nuScenes/'
+data_root = '~/neural_map_prior/data/nuscenes/'
+data_info_path = '~/neural_map_prior/data/nuscenes/'
 
 # input_modality
 input_modality = dict(
