@@ -7,7 +7,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 import torch
 from scipy.spatial.transform import Rotation as R
-from torch.nn import functional as F
 from tqdm import tqdm
 
 bev_real_h = 30
@@ -29,25 +28,26 @@ val_max_geo_loc = {'singapore-onenorth': np.array([1232., 1732.]) + bev_radius,
                    'boston-seaport': np.array([2367., 1720.]) + bev_radius,
                    'singapore-queenstown': np.array([2044., 3333.]) + bev_radius,
                    'singapore-hollandvillage': np.array([2460., 2836.]) + bev_radius}
-#
-# val_min_geo_loc = {'singapore-onenorth': np.array([118., 420.]) - bev_radius,
-#                    'boston-seaport': np.array([298., 328.]) - bev_radius,
-#                    'singapore-queenstown': np.array([347., 862.]) - bev_radius,
-#                    'singapore-hollandvillage': np.array([442., 902.]) - bev_radius}
-# val_max_geo_loc = {'singapore-onenorth': np.array([1232., 1777.]) + bev_radius,
-#                    'boston-seaport': np.array([2527., 1896.]) + bev_radius,
-#                    'singapore-queenstown': np.array([2686., 3298.]) + bev_radius,
-#                    'singapore-hollandvillage': np.array([2490., 2839.]) + bev_radius}
 
 city_min_geo_loc = {}
-for city, geo_min in train_min_geo_loc.items():
-    city_min_geo_loc[city] = np.min(np.stack([val_min_geo_loc[city], geo_min]), axis=0)
+for cn, geo_min in train_min_geo_loc.items():
+    city_min_geo_loc[cn] = np.min(np.stack([val_min_geo_loc[cn], geo_min]), axis=0)
 city_max_geo_loc = {}
-for city, geo_max in train_max_geo_loc.items():
-    city_max_geo_loc[city] = np.max(np.stack([val_max_geo_loc[city], geo_max]), axis=0)
+for cn, geo_max in train_max_geo_loc.items():
+    city_max_geo_loc[cn] = np.max(np.stack([val_max_geo_loc[cn], geo_max]), axis=0)
 
 
-def map_path(map_attribute, dataset, prefix_name='map', gpu_name=None):
+def map_path(map_attribute: dict, dataset, prefix_name='map', gpu_name=None):
+    """
+    Args:
+        map_attribute (dict):
+        dataset (str):
+        prefix_name (str):
+        gpu_name (str):
+
+    Returns:
+
+    """
     if 'prefix' in map_attribute:
         prefix_name = map_attribute['prefix']
     dir_name = '_'.join([prefix_name, map_attribute['tile_param']['data_type'],
@@ -59,16 +59,17 @@ def map_path(map_attribute, dataset, prefix_name='map', gpu_name=None):
 
 
 def get_bev_coords(bev_bound_w, bev_bound_h, bev_w, bev_h, type_flag='numpy'):
-    '''
+    """
     Args:
         bev_bound_w (tuple:2):
         bev_bound_h (tuple:2):
         bev_w (int):
         bev_h (int):
+        type_flag ('numpy' or 'torch'):
 
     Returns: (bev_h, bev_w, 4)
 
-    '''
+    """
 
     if type_flag == 'torch':
         sample_coords = torch.stack(torch.meshgrid(
@@ -87,6 +88,8 @@ def get_bev_coords(bev_bound_w, bev_bound_h, bev_w, bev_h, type_flag='numpy'):
         zeros = np.zeros((bev_h, bev_w, 1), dtype=sample_coords.dtype)
         ones = np.ones((bev_h, bev_w, 1), dtype=sample_coords.dtype)
         sample_coords = np.concatenate([sample_coords, zeros, ones], axis=-1)
+    else:
+        raise NotImplementedError
     return sample_coords
 
 
@@ -107,16 +110,27 @@ def get_coords_resample(bev_feature,
                         bev_feature_int=None,
                         view_info=False,
                         type_flag='numpy'):
-    '''
+    """
     Args:
-        bev_feature (B, bev_h, bev_w, C):
-        pad_bev_feature (B, bev_h, bev_w, C):
-        ego2ego (4, 4):
-        real_h (int):
-        real_w (int):
-    Returns: (B, bev_h, bev_w, C)
+        bev_feature (tensor: B, bev_h, bev_w, C):
+        pad_bev_feature (tensor: B, bev_h, bev_w, C):
+        pad_bev_feature_int (tensor: B, bev_h, bev_w, 1):
+        ego2ego (array: 4, 4):
+        global_bound_h (tuple:2):
+        global_bound_w (tuple:2):
+        real_h (int:1):
+        real_w (int:1):
+        bev_w (int:1):
+        bev_h (int:1):
+        reverse (bool:1):
+        flag (str:'replace' or 'add'):
+        traversal_id (int:1):
+        global_factor (int:1):
+        bev_feature_int (tensor: B, bev_h, bev_w, 1):
+        view_info (bool:1):
+        type_flag ('numpy' or 'torch'):
 
-    '''
+    """
     # device = bev_feature.device
     # B, bev_h, bev_w, C = bev_feature.size()
 
@@ -148,6 +162,8 @@ def get_coords_resample(bev_feature,
     elif type_flag == 'numpy':
         bev_index_w = np.floor((bev_coord_w - global_bound_w[0]) / grid_len_w).astype(np.int64)
         bev_index_h = np.floor((bev_coord_h - global_bound_h[0]) / grid_len_h).astype(np.int64)
+    else:
+        raise NotImplementedError
 
     bev_index_w = bev_index_w.reshape(bev_h, bev_w)
     bev_index_h = bev_index_h.reshape(bev_h, bev_w)
@@ -161,6 +177,8 @@ def get_coords_resample(bev_feature,
         index_h, index_w = torch.where(bev_coord_mask.reshape(bev_h, bev_w))
     elif type_flag == 'numpy':
         index_h, index_w = np.where(bev_coord_mask.reshape(bev_h, bev_w))
+    else:
+        raise NotImplementedError
 
     # overlap_feats = bev_feature[:, index_h, index_w, :]
     # if type_flag == 'torch':
@@ -193,7 +211,8 @@ def get_coords_resample(bev_feature,
 
 def load_nusc_data_infos(dataset, root=None):
     if root is None:
-        root = '~/neural_map_prior/data/nuscenes/'
+        root = '/public/MARS/datasets/nuScenes'
+    # with open(f'{root}/nuscenes_infos_temporal_{dataset}.pkl', 'rb') as f:
     with open(f'{root}/nuScences_map_trainval_infos_{dataset}.pkl', 'rb') as f:
         infos = pkl.load(f)['infos']
     print(f'load {len(infos)} {dataset} data infos for nuscenes dataset...')
@@ -202,8 +221,8 @@ def load_nusc_data_infos(dataset, root=None):
 
 def load_nusc_data_cities(dataset, root=None):
     if root is None:
-        root = '~/neural_map_prior/data/nuscenes_infos'
-    with open(f'{root}/{dataset}_city_infos.pkl', 'rb') as f:
+        root = '/home/xiongx/repository/marsmap/global_map_construction'
+    with open(f'{root}/{dataset}_infos_cityname.pkl', 'rb') as f:
         data_city_names = pkl.load(f)
     print(f'load {len(data_city_names)} {dataset} city names for nuscenes dataset...')
     return data_city_names
@@ -262,7 +281,7 @@ def get_tensor_data_type(data_type):
 
 
 def creat_empty_map_tile_array(map_tile_size, embed_dims, data_type, num_traversals=1):
-    '''
+    """
     Create numpy array for one map tile.
     Args:
         map_tile_size ():
@@ -272,7 +291,7 @@ def creat_empty_map_tile_array(map_tile_size, embed_dims, data_type, num_travers
 
     Returns:
 
-    '''
+    """
     data_type = get_array_data_type(data_type)
     tile_height = map_tile_size[0]
     tile_width = map_tile_size[1]
@@ -285,7 +304,7 @@ def creat_empty_map_tile_array(map_tile_size, embed_dims, data_type, num_travers
 
 
 def creat_empty_map_tile_tensor(map_tile_size, embed_dims, data_type, num_traversals=1):
-    '''
+    """
     Create torch tensor for one map tile.
     Args:
         map_tile_size ():
@@ -295,7 +314,7 @@ def creat_empty_map_tile_tensor(map_tile_size, embed_dims, data_type, num_traver
 
     Returns:
 
-    '''
+    """
     data_type = get_tensor_data_type(data_type)
     tile_height = map_tile_size[0]
     tile_width = map_tile_size[1]
@@ -350,9 +369,12 @@ def sample2map_index(info, city_min_bound, tile_interval):
     return map_index
 
 
-def get_token2map_index(data_infos, city_names,
-                        min_geo_loc, max_geo_loc,
-                        map_prior_tile_size):
+def get_token2map_index(
+        data_infos,
+        city_names,
+        min_geo_loc,
+        max_geo_loc,
+        map_prior_tile_size):
     token2map_index = {}
     dataset_cities = [key for key in min_geo_loc]
     map_index2token = init_city_map_tile_dict(dataset_cities, map_prior_tile_size)
@@ -374,8 +396,16 @@ def get_token2map_index(data_infos, city_names,
     return token2map_index, map_index2token
 
 
-def split_nusc_geo_bs(batch_size, data_infos, data_city_names, dataset,
-                      token2map_index=None, gm_grid_size=None, map_index2token=None, multi_map_index=False):
+def split_nusc_geo_bs(
+        batch_size,
+        data_infos,
+        data_city_names,
+        dataset,
+        token2map_index=None,
+        gm_grid_size=None,
+        map_index2token=None,
+        multi_map_index=False
+):
     min_geo_loc, max_geo_loc = map_geo_loc(dataset)
     assert len(data_infos) == len(data_city_names) == len(token2map_index)
     num_geo = batch_size
@@ -461,9 +491,9 @@ def resample_by_geo(batch_size, infos, data_city_names, dataset, gpu2city_map_in
             per_gpu_city, set([city_name for city_name, city_pop_sample in gpu2city_map_index[i]]))
 
     for k, v in gpu2sample_id.items():
-        # if dataset == 'val':
-        # if dataset == 'val' or dataset == 'train':
-        if dataset == 'train':
+        if dataset == 'val':
+            # if dataset == 'val' or dataset == 'train':
+            # if dataset == 'train':
             print('sort by timestamp')
             timestamps = gpu2timestamp[k]
             ind = np.argsort(timestamps)
@@ -472,9 +502,13 @@ def resample_by_geo(batch_size, infos, data_city_names, dataset, gpu2city_map_in
     return gpu2sample_id
 
 
-def creat_map_gpu_by_name(map_slice_dict, map_attribute,
-                          min_geo_loc, max_geo_loc,
-                          gpu_city_list=None):
+def creat_map_gpu_by_name(
+        map_slice_dict,
+        map_attribute,
+        min_geo_loc,
+        max_geo_loc,
+        gpu_city_list=None
+):
     gm_tile_size = map_attribute['global_map_tile_size']
     gm_raster_size = map_attribute['global_map_raster_size']
 
@@ -495,31 +529,35 @@ def creat_map_gpu_by_name(map_slice_dict, map_attribute,
             map_slice_dict[f'map_{city_name}_{i}_{j}'].zero_()
 
 
-if __name__ == '__main__':
+def draw_global_map():
+    dataset = 'val'
+    result_root = '/home/xiongx/repository/marsmap/vis_results/bevformer_centeraware'
+    # result_root = '/home/xiongx/repository/marsmap/vis_results/GT'
+    save_root = '/localdata_ssd/map_slices/raster_global_map'
+
     map_attribute = {
-        'root_dir': '/localdata_ssd/map_slices/raster_global_map',
-        'prefix': 'lane_render_predict_video_2',
+        'root_dir': save_root,
+        'prefix': 'lane_render_predict_cpu',
         'type': 'rasterized',
         'batch_size': 8,
         'tile_param': {
             'data_type': 'float32',
             'embed_dims': 3,
             'num_traversals': 1, },
+        'single_gpu': False,
         'global_map_tile_size': [1, 1],
         'global_map_raster_size': [0.15, 0.15],
     }
+
     bev_attribute = {
         'real_h': 30,
         'real_w': 60,
         'bev_h': 200,
         'bev_w': 400
     }
-    dataset = 'val'
-    result_root = '/home/xiongx/repository/marsmap/vis_results/bevformer_centeraware'
-    # result_root = '/home/xiongx/repository/marsmap/vis_results/GT'
 
     nusc_min_geo_loc, nusc_max_geo_loc = map_geo_loc(dataset)
-    print(map_attribute, dataset, nusc_min_geo_loc, nusc_max_geo_loc)
+    print(map_attribute, bev_attribute, dataset, nusc_min_geo_loc, nusc_max_geo_loc, result_root)
 
     map_tile_dict = {}
     creat_global_map(map_tile_dict, map_attribute, nusc_min_geo_loc, nusc_max_geo_loc)
@@ -527,24 +565,30 @@ if __name__ == '__main__':
     nusc_data_infos_val = load_nusc_data_infos(dataset)
     nusc_data_city_names_val = load_nusc_data_cities(dataset, root=None)
 
-    val_token2map_index, val_map_index2token = get_token2map_index(
-        nusc_data_infos_val, nusc_data_city_names_val,
-        nusc_min_geo_loc, nusc_max_geo_loc,
-        map_attribute['global_map_tile_size'])
+    val_token2map_index, val_map_index2token = \
+        get_token2map_index(
+            nusc_data_infos_val,
+            nusc_data_city_names_val,
+            nusc_min_geo_loc,
+            nusc_max_geo_loc,
+            map_attribute['global_map_tile_size']
+        )
 
     nusc_data_infos_val_timestamp = list(sorted(nusc_data_infos_val, key=lambda e: e['timestamp']))
-    dataset_cities = [key for key in nusc_min_geo_loc]
-    map_index2count = init_city_map_tile_dict(dataset_cities, map_attribute['global_map_tile_size'])
-    for num_info, info in tqdm(enumerate(nusc_data_infos_val_timestamp)):
-        # for num_info, info in tqdm(enumerate(nusc_data_infos_val)):
+    for num_info, info in enumerate(tqdm(nusc_data_infos_val_timestamp)):
         data_cn = val_token2map_index[info['token']]['loc']
-        if data_cn != 'singapore-hollandvillage':
-            continue
+        # if data_cn != 'singapore-hollandvillage':
+        #     continue
         map_index = val_token2map_index[info['token']]['map_index_list'][0]
 
-        map_slice_min_bound, map_slice_max_bound = map_tile_bound(
-            nusc_min_geo_loc, nusc_max_geo_loc, data_cn, map_index,
-            map_attribute['global_map_tile_size'])
+        map_slice_min_bound, map_slice_max_bound = \
+            map_tile_bound(
+                nusc_min_geo_loc,
+                nusc_max_geo_loc,
+                data_cn,
+                map_index,
+                map_attribute['global_map_tile_size']
+            )
 
         trans = gen_matrix(
             info['ego2global_rotation'],
@@ -552,12 +596,14 @@ if __name__ == '__main__':
         )
 
         global_map_slice = map_tile_dict[f'map_{data_cn}_{map_index[0]}_{map_index[1]}']
+
         try:
             bev_feature = torch.load(os.path.join(result_root, info['token'])).astype(np.int32)
             bev_feature_org = copy.deepcopy(bev_feature)
         except:
             print('im here')
             continue
+
         bev_feature = bev_feature.transpose(1, 2, 0)[np.newaxis]
 
         if not isinstance(global_map_slice, np.ndarray):
@@ -579,85 +625,6 @@ if __name__ == '__main__':
             flag='replace'
         )
         map_tile_dict[f'map_{data_cn}_{map_index[0]}_{map_index[1]}'] = global_map_slice
-
-        map_index2count[data_cn][f'map_index_{map_index[0]}_{map_index[1]}'].append(1)
-
-        result_root_gt = '/home/xiongx/repository/marsmap/vis_results/GT'
-        bev_feature_gt = torch.load(os.path.join(result_root_gt, info['token'])).astype(np.int32)
-        result_root_baseline = '/home/xiongx/repository/marsmap/vis_results/bevformer_baseline'
-        bev_feature_baseline = torch.load(os.path.join(result_root_baseline, info['token'])).astype(np.int32)
-
-        result_root_hdmapnet = '/home/xiongx/repository/marsmap/vis_results/hdmapnet_baseline'
-        bev_feature_hdmapnet = torch.load(os.path.join(result_root_hdmapnet, info['token'])).astype(np.int32)
-
-        fig = plt.figure(figsize=(4, 8), dpi=200)
-        row_num = 4
-        for i, semantic_pro in enumerate([bev_feature_hdmapnet, bev_feature_baseline, bev_feature_org, bev_feature_gt]):
-            ax = fig.add_subplot(row_num, 1, i + 1)
-            semantic_show = np.full(
-                shape=(3, semantic_pro.shape[-2],
-                       semantic_pro.shape[-1]),
-                fill_value=255, dtype=np.uint8)
-
-            semantic_show[:, semantic_pro[2].astype(np.int32) == 1] = \
-                np.array([107, 156, 123], dtype=np.uint8).reshape(3, 1)
-            if i == 5:
-                semantic_show[:, semantic_pro[0].astype(np.int32) == 1] = \
-                    np.array([178, 97, 103], dtype=np.uint8).reshape(3, 1)
-                semantic_show[:, semantic_pro[1].astype(np.int32) == 1] = \
-                    np.array([97, 135, 178], dtype=np.uint8).reshape(3, 1)
-            else:
-                semantic_show[:, semantic_pro[0].astype(np.int32) == 1] = \
-                    np.array([97, 135, 178], dtype=np.uint8).reshape(3, 1)
-                semantic_show[:, semantic_pro[1].astype(np.int32) == 1] = \
-                    np.array([178, 97, 103], dtype=np.uint8).reshape(3, 1)
-
-            ax.imshow(semantic_show.transpose((1, 2, 0)))
-            ax.set_xbound(0, 400)
-            ax.set_ybound(0, 200)
-            ax.axis('off')
-
-        save_vis_pred_dir = os.path.join('/localdata_ssd/map_slices', map_attribute['prefix'], data_cn, 'zoomin')
-        os.makedirs(save_vis_pred_dir, exist_ok=True)
-
-        count = len(map_index2count[data_cn][f'map_index_{map_index[0]}_{map_index[1]}'])
-        count = str(count).zfill(4)
-        imname = f'{save_vis_pred_dir}/map_{count}.jpg'
-        print('saving', imname)
-        plt.savefig(imname)
-        plt.close()
-
-        # bound = 6000
-        # pointer = 0
-        # print(bound * pointer)
-        # print(bound * (pointer + 1))
-        # if bound * pointer < num_info < bound * (pointer + 1):
-        #     semantic_show = np.full(
-        #         shape=(3, global_map_slice.shape[1],
-        #                global_map_slice.shape[2]),
-        #         fill_value=255, dtype=np.uint8)
-        #     semantic_show[:, global_map_slice[0, ..., 0].astype(np.int32) == 1] = \
-        #         np.array([97, 135, 178], dtype=np.uint8).reshape(3, 1)
-        #     semantic_show[:, global_map_slice[0, ..., 1].astype(np.int32) == 1] = \
-        #         np.array([178, 97, 103], dtype=np.uint8).reshape(3, 1)
-        #     semantic_show[:, global_map_slice[0, ..., 2].astype(np.int32) == 1] = \
-        #         np.array([107, 156, 123], dtype=np.uint8).reshape(3, 1)
-        #
-        #     fig = plt.figure(figsize=(7, 7), dpi=400)
-        #     ax = fig.add_subplot(1, 1, 1)
-        #     ax.imshow(semantic_show.transpose((1, 2, 0)))
-        #     ax.set_xbound(0, global_map_slice.shape[2])
-        #     ax.set_ybound(0, global_map_slice.shape[1])
-        #     ax.axis('off')
-        #
-        #     save_vis_pred_dir = os.path.join('/localdata_ssd/map_slices', map_attribute['prefix'], data_cn)
-        #     os.makedirs(save_vis_pred_dir, exist_ok=True)
-        #
-        #     count = len(map_index2count[data_cn][f'map_index_{map_index[0]}_{map_index[1]}'])
-        #     imname = f'{save_vis_pred_dir}/map_{count}.jpg'
-        #     print('saving', imname)
-        #     plt.savefig(imname)
-        #     plt.close()
 
     cus_map_path = map_path(map_attribute, dataset)
     save_global_map(cus_map_path, map_tile_dict, map_attribute, nusc_min_geo_loc, nusc_max_geo_loc)
@@ -693,3 +660,7 @@ if __name__ == '__main__':
         print('saving', imname)
         plt.savefig(imname)
         plt.close()
+
+
+if __name__ == '__main__':
+    draw_global_map()
