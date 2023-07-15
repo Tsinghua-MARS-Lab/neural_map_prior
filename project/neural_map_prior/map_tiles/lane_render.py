@@ -1,3 +1,4 @@
+import argparse
 import copy
 import glob
 import os
@@ -529,11 +530,10 @@ def creat_map_gpu_by_name(
             map_slice_dict[f'map_{city_name}_{i}_{j}'].zero_()
 
 
-def draw_global_map():
+def draw_global_map(args):
     dataset = 'val'
-    result_root = '/home/xiongx/repository/marsmap/vis_results/bevformer_centeraware'
-    # result_root = '/home/xiongx/repository/marsmap/vis_results/GT'
-    save_root = '/localdata_ssd/map_slices/raster_global_map'
+    result_root = args.result_root
+    save_root = args.save_root
 
     map_attribute = {
         'root_dir': save_root,
@@ -663,4 +663,8 @@ def draw_global_map():
 
 
 if __name__ == '__main__':
-    draw_global_map()
+    parser = argparse.ArgumentParser(description='arg parser')
+    parser.add_argument('--result_root', type=str, default='nmp_results')
+    parser.add_argument('--save_root', type=str, default='')
+    args = parser.parse_args()
+    draw_global_map(args)

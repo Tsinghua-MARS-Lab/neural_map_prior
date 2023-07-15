@@ -99,8 +99,8 @@ python tools/test.py $YOUR_CONFIG $YOUR_CKPT --eval iou
 ## Visualization
 
 To visualize the predictions, you can first try with nmp_results, which you can download
-from [here](https://drive.google.com/file/d/1vcajqEPfIJ_Vb4jrG4umoKY_qp3ZrsCE/view?usp=sharing), and run:
+from [here](https://drive.google.com/file/d/1vcajqEPfIJ_Vb4jrG4umoKY_qp3ZrsCE/view?usp=sharing), upzip and run:
 
 ```bash
-python project/neural_map_prior/map_tiles/lane_render.py
+python project/neural_map_prior/map_tiles/lane_render.py --result_root 'nmp_results'
 ```

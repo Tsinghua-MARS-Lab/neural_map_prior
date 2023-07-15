@@ -2,7 +2,7 @@
 
 ## Download and prepare the nuScenes dataset
 
-Download nuScenes V1.0 full dataset data [HERE](https://www.nuscenes.org/download), including the map extensions. Data
+Download nuScenes V1.0 full dataset data [HERE](https://www.nuscenes.org/download), including the map extensions(V1.3). Data
 creation should be under the GPU environment.
 Prepare nuscenes data by running
 
