@@ -1,6 +1,25 @@
 # Getting started with Neural Map Prior
 
-## Before training
+## Evaluation Test
+
+Please ensure that the environment and the nuScenes dataset are ready. You can test it by assessing the pre-trained
+first-stage baseline model as shown below:
+
+```bash
+cd neural_map_prior
+./tools/dist_test.sh ./project/configs/bevformer_30m_60m.py ./ckpts/bevformer_epoch_24.pth 8 --eval iou
+```
+
+If everything is done correctly, the output should be:
+(if you test with a different number of GPUs than 8, the results may differ slightly.)
+
+```markdown
+Divider | Crossing | Boundary | All(mIoU)
+
+49.20 | 28.67 | 50.43 | 42.76
+```
+
+## Before Neural Map Prior Training
 
 ### step 1. computation requirements
 

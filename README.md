@@ -4,9 +4,9 @@
 
 [Xuan Xiong](), [Yicheng Liu](https://scholar.google.com.hk/citations?hl=en&user=vRmsgQUAAAAJ), [Tianyuan Yuan](), [Yue Wang](https://people.csail.mit.edu/yuewang/), [Yilun Wang](https://scholar.google.com.hk/citations?user=nUyTDosAAAAJ&hl=en/), [Hang Zhao*](http://people.csail.mit.edu/hangzhao/)
 
-[//]: # (![github-demo.gif]&#40;figs/github-demo.gif&#41;)
+![github-demo.g![npn_demo_5-min (2).gif](..%2F..%2FDocuments%2Fnmp_ppt_sum%2Fnpn_demo_5-min%20%282%29.gif)if](figs/github-demo.gif)
 
-[![Watch the video](https://img.youtube.com/vi/OhHGzpQTifo/maxresdefault.jpg)](https://www.youtube.com/watch?v=OhHGzpQTifo)
+[//]: # ([![Watch the video]&#40;https://img.youtube.com/vi/OhHGzpQTifo/maxresdefault.jpg&#41;]&#40;https://www.youtube.com/watch?v=OhHGzpQTifo&#41;)
 
 
 [//]: # (![multi-trip fusion]&#40;figs/github-demo.gif&#41;)
