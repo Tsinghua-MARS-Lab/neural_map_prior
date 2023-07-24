@@ -18,7 +18,7 @@ Copy the infos file into `$neural_map_prior/data/nuscenes/`.
 
 Except for that, you need to
 download [train_city_infos.pkl](https://drive.google.com/file/d/1WZ9fzVIiq9V-B8_l3EtF19Q9aLg6hmPG/view?usp=sharing) and
-[val_city_infos.pkl](https://drive.google.com/file/d/1J3-BQzbaKJaHsEMZTTVDq5JvO5HHG41M/view?usp=sharing), which includes
+[val_city_infos.pkl](https://drive.google.com/file/d/1J3-BQzbaKJaHsEMZTTVDq5JvO5HHG41M/view?usp=sharing) or you can generate by code in [here](project/neural_map_prior/data_utils/nusc_city_infos.py), which includes
 the information of
 each sample's city, which helps in determining which sample is in which map tile.
 
