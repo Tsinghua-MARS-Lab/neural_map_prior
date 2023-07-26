@@ -2,7 +2,8 @@
 
 ## Download and prepare the nuScenes dataset
 
-Download nuScenes V1.0 full dataset data [HERE](https://www.nuscenes.org/download), including the map extensions(V1.3). Data
+Download nuScenes V1.0 full dataset data [HERE](https://www.nuscenes.org/download), including the map extensions(V1.3).
+Data
 creation should be under the GPU environment.
 Prepare nuscenes data by running
 
@@ -16,11 +17,11 @@ files [nuScences_map_trainval_infos_train.pkl](https://drive.google.com/file/d/1
 and [nuScences_map_trainval_infos_val.pkl](https://drive.google.com/file/d/1H6HfnNqmKBFvNIivApcsRUCgPtxgIq7A/view?usp=sharing).
 Copy the infos file into `$neural_map_prior/data/nuscenes/`.
 
-Except for that, you need to
+In addition, you will need to
 download [train_city_infos.pkl](https://drive.google.com/file/d/1WZ9fzVIiq9V-B8_l3EtF19Q9aLg6hmPG/view?usp=sharing) and
-[val_city_infos.pkl](https://drive.google.com/file/d/1J3-BQzbaKJaHsEMZTTVDq5JvO5HHG41M/view?usp=sharing) or you can generate by code in [here](project/neural_map_prior/data_utils/nusc_city_infos.py), which includes
-the information of
-each sample's city, which helps in determining which sample is in which map tile.
+[val_city_infos.pkl](https://drive.google.com/file/d/1J3-BQzbaKJaHsEMZTTVDq5JvO5HHG41M/view?usp=sharing) or you can
+generate them using the code provided [here](project/neural_map_prior/data_utils/nusc_city_infos.py). These files
+contain information about each sample's city, which is crucial for determining which sample belongs to which map tile.
 
 ## nuScenes Dataset Structure
 
@@ -31,6 +32,7 @@ corresponding paths in config files.
 ```bash
 mkdir data && cd data
 ln -s /path/to/your/dataset/nuScenes nuscenes
+mkdir nuscenes_infos
 ```
 
 ```

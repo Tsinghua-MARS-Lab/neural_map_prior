@@ -7,6 +7,11 @@ first-stage baseline model as shown below:
 
 ```bash
 cd neural_map_prior
+mkdir ckpts && cd ckpts
+```
+
+```bash
+cd ..
 ./tools/dist_test.sh ./project/configs/bevformer_30m_60m.py ./ckpts/bevformer_epoch_24.pth 8 --eval iou
 ```
 
@@ -28,9 +33,31 @@ in the training and testing process.
 
 ### step 2. add custom data_sampler
 
-In our setup, we need to manually replace mmdet `mmdet/apis/train.py` with ours `tools/mmdet_train.py` to add a new
-custom data_sampler.
+In our setup, to add a new custom data_sampler, we need to manually copy the `tools/mmdet_train.py` file to the path of
+the installed package mmdet located in `mmdet/apis/*`. Then, we rename the copied mmdet_train.py file to train.py.
+Additionally, we need to ensure the project root is added to the PYTHONPATH so that it can
+reference `tools/data_sampler.py`.
 If you know how to add a new data_sampler through config, please let us know through a pull request.
+
+Notes: Whether for training or evaluation, remember to change the root directory addresses of the data_infos/city_infos
+in these two areas.
+
+1. `project/configs/bevformer_30m_60m.py` or `project/configs/neural_map_prior_bevformer_30m_60m.py`
+
+   ```python
+   data_root = 'path/to/data/nuscenes/'
+   data_info_path = 'path/to/data/nuscenes/'
+   ```
+
+2. Within the two functions in this file `project/neural_map_prior/map_tiles/lane_render.py`
+   `load_nusc_data_infos` and `load_nusc_data_cities`:
+
+   ```python
+   # load_nusc_data_infos 
+   root = 'path/to/data/nuscenes'
+   # load_nusc_data_cities
+   root = 'path/to/data/nuscenes_info'
+   ```
 
 ## Training
 
@@ -53,7 +80,7 @@ To train neural_map_prior with 8 GPUs, run:
 bash tools/dist_train.sh $CONFIG 8
 ```
 
-For example, if you want to train baseline and neural_map_prior with 8 GPUs on nuScenes dataset, run:
+For example, if you want to train baseline with 8 GPUs on nuScenes dataset, run:
 
 ```bash
 bash tools/dist_train.sh project/configs/bevformer_30m_60m.py 8
@@ -72,10 +99,12 @@ mkdir ckpts && cd ckpts
 
 ### Stage 2: Finetune with NMP
 
-Based on the last epoch obtained by the baseline training (epoch_24 in our setting), which is set in `load_from` in
-config, fine-tune another 24 epochs to achieve the NMP advantage brought to the table. In the time of fine-tuning, we
-freeze the training of the backbone and neck.
-(~ 12GB GPU Memory, ~1 days for 24 epochs on 8 3090 GPUs)
+Building upon the last epoch achieved during baseline training (epoch_24 in our setting), which is specified in the
+`load_from` configuration, we perform fine-tuning for an additional 24 epochs to leverage the advantages of NMP. During
+the fine-tuning process, we keep the training of the backbone and neck frozen.
+(~ 13GB GPU Memory, ~ 1 days for 24 epochs on 8 3090 GPUs)
+
+For example, if you want to train neural map prior with 8 GPUs on nuScenes dataset, run:
 
 ```bash
 bash tools/dist_train.sh project/configs/neural_map_prior_bevformer_30m_60m.py 8
@@ -100,13 +129,13 @@ bash tools/dist_test.sh $YOUR_CONFIG $YOUR_CKPT 8 --eval iou
 For example, if you want to evaluate the baseline and neural_map_prior with 8 GPUs on nuScenes dataset, run:
 
 ```bash
-bash tools/dist_test.sh project/configs/bevformer_30m_60m.py $YOUR_CKPT 8 --eval iou
+bash tools/dist_test.sh project/configs/bevformer_30m_60m.py ./ckpts/bevformer_epoch_24.pth 8 --eval iou
 ```
 
 (To evaluate neural_map_prior, Be careful to set the appropriate `data_sample.py` that needs to be used in NMP.)
 
 ```bash
-bash tools/dist_test.sh project/configs/neural_map_prior_bevformer_30m_60m.py $YOUR_CKPT 8 --eval iou
+bash tools/dist_test.sh project/configs/neural_map_prior_bevformer_30m_60m.py ./ckpts/nmp_epoch_24.pth 8 --eval iou
 ```
 
 ### Single GPU evaluation
